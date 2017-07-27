@@ -1,11 +1,17 @@
 'use strict';
 
+import React from 'react';
+//import Board from './components/Board';
+import Game from './components/Game';
+
 class App extends React.Component {
     render() {
         return (
-            <span>THIS IS REACT :o)</span>
-        )
+            <div>
+                <Game />
+            </div>
+        );
     }
 }
 
-export default App; 
+export default App;

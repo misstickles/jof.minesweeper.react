@@ -26,16 +26,17 @@ var config = {
             'node_modules/bootstrap/dist/css/bootstrap-theme.min.css'
         ],
         less: [
-            './src/**/*.less'
+            './src/less/*.less'
         ],
-        dist: './dist',
-        mainJs: './src/main.js'
+        images: './src/images/*',
+        dist: './build',
+        mainJs: './src/index.js'
     },
 }
 
 gulp.task('connect', () => {
     connect.server({
-        root: ['dist'],
+        root: [config.paths.dist],
         port: config.port,
         base: config.baseUrl,
         livereload: true
@@ -43,7 +44,7 @@ gulp.task('connect', () => {
 });
 
 gulp.task('open', ['connect'], () => {
-    gulp.src('dist/index.html')
+    gulp.src(config.paths.dist + '/index.html')
         .pipe(open({
             uri: config.baseUrl + ':' + config.port + '/'
         }));
@@ -56,13 +57,16 @@ gulp.task('html', () => {
 });
 
 gulp.task('js', () => {
-    browserify(config.paths.mainJs)
+    browserify({
+        entries: config.paths.mainJs,
+        extensions: ['.js'],
+        debug: true})
         .transform(babelify)
         .bundle()
         .on('error', function(err) { console.error(err); })
         .pipe(source('bundle.js'))
-        .pipe(buffer())
-        .pipe(uglify())
+        // .pipe(buffer())
+        // .pipe(uglify())
         .pipe(gulp.dest(config.paths.dist + '/scripts'))
         .pipe(connect.reload());
 });
@@ -81,6 +85,15 @@ gulp.task('less', () => {
 		.pipe(gulp.dest(config.paths.dist + '/css'));
 });
 
+gulp.task('images', () => {
+    gulp.src(config.paths.images)
+        .pipe(gulp.dest(config.paths.dist + '/img'))
+        .pipe(connect.reload());
+
+    gulp.src('./src/favicon.ico')
+        .pipe(gulp.dest(config.paths.dist));
+});
+
 gulp.task('lint', () => {
     return gulp.src(config.paths.js)
         .pipe(eslint())
@@ -93,4 +106,4 @@ gulp.task('watch', () => {
     gulp.watch(config.paths.js, ['js', 'lint']);
 });
 
-gulp.task('default', ['html', 'js', 'css', 'less', 'lint', 'open', 'watch']);
+gulp.task('default', ['html', 'js', 'css', 'less', 'images', 'lint', 'open', 'watch']);
