@@ -82,7 +82,8 @@ gulp.task('less', () => {
         .pipe(less())
         .pipe(minifyCSS())
 		.pipe(concat('app.css'))
-		.pipe(gulp.dest(config.paths.dist + '/css'));
+        .pipe(gulp.dest(config.paths.dist + '/css'))
+        .pipe(connect.reload());
 });
 
 gulp.task('images', () => {
@@ -104,6 +105,7 @@ gulp.task('lint', () => {
 gulp.task('watch', () => {
     gulp.watch(config.paths.html, ['html']);
     gulp.watch(config.paths.js, ['js', 'lint']);
+    gulp.watch(config.paths.less, ['less']);
 });
 
 gulp.task('default', ['html', 'js', 'css', 'less', 'images', 'lint', 'open', 'watch']);

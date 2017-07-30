@@ -2,11 +2,11 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import {flag} from '../images/flag.svg';
+//import {flag} from '../images/flag.svg';
 
 const Flag = ({id}) => {
     return (
-        <img src={flag}
+        <img src="img/flag.svg"
             name={`flag${id}`}
             key={id} />
     );

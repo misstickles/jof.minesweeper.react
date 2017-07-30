@@ -1,6 +1,23 @@
 import * as types from '../actions/actionTypes';
 
 export default {
+    board: {
+        defaultCell: {
+            isMine: false,
+            isFlag: false,
+            isUnknown: false,
+            isOpened: false,
+            value: 0,
+        },
+        // TODO: get setup from an already defined level
+        level: {
+            rows: 10,
+            cols: 10,
+            mines: 10,
+            label: "Easy",
+            action: types.CHANGE_DIFFICULTY_EASY
+        }
+    },
     levels: {
         easy: {
             rows: 10,

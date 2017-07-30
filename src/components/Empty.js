@@ -4,14 +4,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Empty = ({id}) => {
-    <span
+    return (<span
         className="empty"
         name={`empty${id}`}
         key={id}>
         &nbsp;
-    </span>;
+    </span>);
 };
 
 Empty.propTypes = {
     id: PropTypes.number.isRequired
 };
+
+export default Empty;

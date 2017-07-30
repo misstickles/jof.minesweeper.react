@@ -2,12 +2,13 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import {mine} from '../images/mine.svg';
+//import {mine} from '../images/mine.svg';
 
 const Mine = ({id}) => {
-    <img src={mine}
+    return (<img src="img/mine.svg"
         name={`mine${id}`}
-        key={id} />;
+        key={id} />
+    );
 };
 
 Mine.propTypes = {

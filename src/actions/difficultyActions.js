@@ -6,4 +6,4 @@ export const changeLevel = (levelType) => {
             type: levelType
         });
     };
-}
+};

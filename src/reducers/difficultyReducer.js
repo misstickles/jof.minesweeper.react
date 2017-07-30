@@ -18,7 +18,6 @@ export default (state = initialState.difficulty, action) => {
         };
     case types.CHANGE_DIFFICULTY_HARD:
         return {
-            ...state,
             level: options.levels.hard
         };
     default:

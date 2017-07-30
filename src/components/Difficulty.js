@@ -15,20 +15,20 @@ class Difficulty extends React.PureComponent {
         this.props.actions.changeLevel(levelAction);
     }
 
+    // TODO: state is not updating on Game.js
     render() {
         const levels = Object.entries(options.levels).map((level) => {
-            return <span 
+            return (<span 
                 className="btn btn-warning" 
                 onClick={() => this.changeLevel(level[1].action)}
                 key={level[1].label}>
                 {level[1].label}
-            </span>;            
+            </span>);            
         });
 
         return (
             <div>
                 {levels}
-                <span>{this.props.difficulty.level.mines}</span>
             </div>
         );
     }
